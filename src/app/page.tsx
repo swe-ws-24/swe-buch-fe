@@ -6,27 +6,11 @@ import BookList from "@/components/searchPage/Booklist"; // Import the Booklist 
 export default function Home() {
   return (
     <main>
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2 p-0">
-                    <Sidebar />
-                </div>
-                <div className="col-md-10">
-                    <div className="row">
-                        <div className="col-10 p-3">
-                            <Searchbar />
-                        </div>
-                        <div className="col-2">
-                            <Anlegebutton />
-                        </div>
-                        <div className="col-12">
-                            <BookList />
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <div style={{ border: "1px solid black", padding: "20px" }}>
+          <LoginForm />
         </div>
+      </div>
     </main>
   )
 }
