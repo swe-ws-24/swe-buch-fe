@@ -21,13 +21,6 @@ const BookForm: React.FC = () => {
                             <input type="text" className="form-control" id="subtitle" placeholder="Untertitel eingeben" />
                         </div>
                     </div>
-                    {/* Autor */}
-                    <div className="row mb-3 align-items-center">
-                        <label htmlFor="author" className="col-sm-4 col-form-label text-nowrap">Autor</label>
-                        <div className="col-sm-8">
-                            <input type="text" className="form-control" id="author" placeholder="Autor eingeben" />
-                        </div>
-                    </div>
                     {/* Erschienen */}
                     <div className="row mb-3 align-items-center">
                         <label htmlFor="date" className="col-sm-4 col-form-label text-nowrap">Erschienen</label>
@@ -35,11 +28,14 @@ const BookForm: React.FC = () => {
                             <input type="date" className="form-control" id="date" />
                         </div>
                     </div>
-                    {/* Verlag */}
+                    {/* Art */}
                     <div className="row mb-3 align-items-center">
-                        <label htmlFor="publisher" className="col-sm-4 col-form-label text-nowrap">Verlag</label>
+                        <label htmlFor="type" className="col-sm-4 col-form-label text-nowrap">Art</label>
                         <div className="col-sm-8">
-                            <input type="text" className="form-control" id="publisher" placeholder="Verlag eingeben" />
+                            <select className="form-control" id="type">
+                                <option value="DRUCKAUSGABE">Buchdruck</option>
+                                <option value="KINDLE">Kindle</option>
+                            </select>
                         </div>
                     </div>
                     {/* ISBN */}
@@ -47,24 +43,6 @@ const BookForm: React.FC = () => {
                         <label htmlFor="isbn" className="col-sm-4 col-form-label text-nowrap">ISBN</label>
                         <div className="col-sm-8">
                             <input type="text" className="form-control" id="isbn" placeholder="ISBN eingeben" />
-                        </div>
-                    </div>
-                    {/* Genre */}
-                    <div className="row mb-3 align-items-center">
-                        <label htmlFor="genre" className="col-sm-4 col-form-label text-nowrap">Genre</label>
-                        <div className="col-sm-8">
-                            <select className="form-control" id="genre">
-                                <option>Romane</option>
-                                <option>Thriller</option>
-                                <option>Krimi</option>
-                                <option>Science-Fiction</option>
-                                <option>Fantasy</option>
-                                <option>Sachbuch</option>
-                                <option>Biografie</option>
-                                <option>Kinderbuch</option>
-                                <option>Liebesroman</option>
-                                <option>Historischer Roman</option>
-                            </select>
                         </div>
                     </div>
                     {/* Preis */}
@@ -94,7 +72,7 @@ const BookForm: React.FC = () => {
                     <div className="row mb-3 align-items-center">
                         <label htmlFor="keywords" className="col-sm-4 col-form-label text-nowrap">Schlagwörter</label>
                         <div className="col-sm-8">
-                            <input type="text" className="form-control" id="keywords" placeholder="Schlagwörter eingeben" />
+                            <input type="text" className="form-control" id="keywords" placeholder="Schlagwörter eingeben (kommagetrennt)" />
                         </div>
                     </div>
                     {/* Lieferbar */}
@@ -102,8 +80,8 @@ const BookForm: React.FC = () => {
                         <label htmlFor="available" className="col-sm-4 col-form-label text-nowrap">Lieferbar</label>
                         <div className="col-sm-8">
                             <select className="form-control" id="available">
-                                <option>Ja</option>
-                                <option>Nein</option>
+                                <option value="true">Ja</option>
+                                <option value="false">Nein</option>
                             </select>
                         </div>
                     </div>
@@ -125,7 +103,7 @@ const BookForm: React.FC = () => {
                     <div className="row mb-3 align-items-center">
                         <label htmlFor="id" className="col-sm-4 col-form-label text-nowrap">Id</label>
                         <div className="col-sm-8">
-                            <input type="text" className="form-control" id="id" placeholder="Id eingeben" readOnly />
+                            <input type="text" className="form-control" id="id" placeholder="Id" readOnly />
                         </div>
                     </div>
                     {/* Abbildungen */}
@@ -133,9 +111,6 @@ const BookForm: React.FC = () => {
                         <label htmlFor="images" className="col-sm-4 col-form-label text-nowrap">Abbildungen</label>
                         <div className="col-sm-8">
                             <input type="file" className="form-control-file" id="images" multiple />
-                            <small id="fileHelp" className="form-text text-muted mt-1">
-                                Keine ausgewählt
-                            </small>
                         </div>
                     </div>
                 </div>
