@@ -1,9 +1,10 @@
-// src/components/adminPanel/BookForm.tsx
 import { AbbildungInput, BuchArt, BuchInput } from '@/graphql/interfaces';
 import { createBuch } from '@/graphql/queries';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const BookForm: React.FC = () => {
+    const router = useRouter();
     const [isbn, setIsbn] = useState<string>("");  // Done
     const [rating, setRating] = useState<number>(5);  // Done
     const [art, setArt] = useState<BuchArt>(BuchArt.KINDLE);  // Done
@@ -50,8 +51,14 @@ const BookForm: React.FC = () => {
             setError("");
             createBuch(data).then((buchResponse) => {
                 console.log(buchResponse);
-                if (buchResponse.data.errors.length >= 1) {
-                    setError(buchResponse.data.errors[0].message);
+                try {
+                    if (buchResponse.data.errors.length >= 1) {
+                        setError(buchResponse.data.errors[0].message);
+                    }
+                } catch (e) {
+                    if (buchResponse.data?.data?.create) {
+                        router.push(`/${buchResponse.data?.data?.create.id}/details`);
+                    }
                 }
             });
         } else {
