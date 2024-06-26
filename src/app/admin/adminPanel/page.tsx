@@ -1,6 +1,6 @@
+'use client';
 // src/app/admin/adminPanel/page.tsx
 import React from 'react';
-import ConfirmButton from '@/components/adminPanel/ConfirmButton';
 import BookForm from '@/components/adminPanel/BookForm';
 import HomeButton from '@/components/adminPanel/HomeButton';
 import AdminUsername from '@/components/adminPanel/AdminUsername';
@@ -15,17 +15,7 @@ const AdminPanel: React.FC = () => {
                         <AdminUsername username="Username" />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <BookForm />
-                    </div>
-                </div>
-                <div className="d-flex justify-content-center mt-4">
-                    <div className="d-flex justify-content-center align-items-center p-3 border rounded shadow-sm me-3" style={{ height: '40px', minWidth: '100px' }}>
-                        API-Response
-                    </div>
-                    <ConfirmButton />
-                </div>
+                <BookForm />
             </div>
         </main>
     );
