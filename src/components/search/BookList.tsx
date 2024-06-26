@@ -7,10 +7,10 @@ import {
 } from '@graphql/interfaces'
 import { useSearchCriteria } from '@context/SearchCriteriaContext';
 import { queryBuecher } from '@graphql/queries';
-import { AxiosResponse } from 'axios';
 
 const BookList: React.FC = () => {
     const [books, setBooks] = useState<Buch[]>([]);
+    const [error, setError] = useState<string>("");
     const { criteria } = useSearchCriteria();
 
     useEffect(() => {
@@ -24,6 +24,9 @@ const BookList: React.FC = () => {
                     setBooks(response.data.data.buecher);
                 } else {
                     setBooks([]);
+                    if (response.data.errors.length >= 1) {
+                        setError(response.data.errors[0].message)
+                    }
                 }
             }
         });
@@ -43,6 +46,9 @@ const BookList: React.FC = () => {
                     </div>
                 </div>
             ))}
+            <div>
+                {error}
+            </div>
             <div className="mt-4 text-center">
                 <div className="d-flex justify-content-center align-items-center">
                     <input type="text" className="form-control" placeholder="Neues Buch anlegen:" style={{width: '300px'}} />
