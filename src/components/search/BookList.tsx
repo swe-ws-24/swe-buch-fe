@@ -1,25 +1,40 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import {
+    Buch,
+    BuchFields,
+    FilterParameter,
+} from '@graphql/interfaces'
+import { useSearchCriteria } from '@context/SearchCriteriaContext';
+import { queryBuecher } from '@graphql/queries';
+import { AxiosResponse } from 'axios';
 
-interface Book {
-    id: number;
-    title: string;
-    subtitle: string;
-    isbn: string;
-    rating: number;
-    price: number;
-}
+const BookList: React.FC = () => {
+    const [books, setBooks] = useState<Buch[]>([]);
+    const { criteria } = useSearchCriteria();
 
-interface BookListProps {
-    books: Book[];
-}
+    useEffect(() => {
+        console.log(criteria);
+        const response = queryBuecher(
+            criteria,
+        ).then((response) => {
+            console.log(response);
+            if (response.status == 200){
+                if (response.data.data.buecher) {
+                    setBooks(response.data.data.buecher);
+                } else {
+                    setBooks([]);
+                }
+            }
+        });
+    }, [criteria]);
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
     return (
         <div>
-            {books.map(book => (
+            {books.map((book: Buch) => (
                 <div key={book.id} className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light">
                     <div className="text-truncate me-2" style={{ minWidth: 0 }}>
-                        <span>Buch: {book.title}, {book.subtitle}, ISBN: {book.isbn}, Rating: {book.rating}, Preis: {book.price} €</span>
+                        <span>Buch: {book.titel.titel}, {book.titel.untertitel}, ISBN: {book.isbn}, Rating: {book.rating}, Preis: {book.preis} €</span>
                     </div>
                     <div className="flex-shrink-0">
                         <button className="btn btn-primary btn-sm me-1">Details</button>

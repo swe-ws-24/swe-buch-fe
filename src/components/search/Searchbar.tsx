@@ -1,6 +1,5 @@
 // src/components/search/Searchbar.tsx
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Searchbar: React.FC = () => {
     return (
