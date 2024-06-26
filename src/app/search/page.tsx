@@ -4,7 +4,7 @@ import Searchbar from '@/components/search/Searchbar';
 import Filter from '@/components/search/Filter';
 import BookList from '@/components/search/BookList';
 import { SearchCriteriaProvider } from '@context/SearchCriteriaContext';
-import Anlegebutton from '@/components/searchPage/Anlegebutton';
+import Anlegebutton from '@/components/search/Anlegebutton';
 
 const SearchPage: React.FC = () => {
     return (
