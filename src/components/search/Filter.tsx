@@ -12,14 +12,12 @@ const Filter: React.FC = () => {
 
     const propagateSearch = () => {
         const suchkriterien: SuchkriterienInput = {
-            titel: "",
+            titel: criteria.titel,
             isbn: "",
             lieferbar: lieferbar,
             rating: rating,
             art: buchArt,
         };
-        
-        console.log(suchkriterien);
         setCriteria(suchkriterien);
     };
 
@@ -29,7 +27,7 @@ const Filter: React.FC = () => {
                 (e) => {
                     propagateSearch();
                 }
-            }>Suchen</button>
+            }>Save Filter</button>
             <br />
             <div className="mb-2">
                 <h6 className="mb-1">Lieferbar?</h6>
