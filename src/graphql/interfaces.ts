@@ -38,3 +38,36 @@ export interface LoginStatus {
     expiresIn?: string;
     issuer?: string;
 }
+
+export enum BuchArt {
+    DRUCKAUSGABE = "DRUCKAUSGABE",
+    KINDLE = "KINDLE",
+}
+
+export interface SuchkriterienInput {
+    titel?: string;
+    isbn?: string;
+    rating?: number;
+    art?: BuchArt;
+    lieferbar?: boolean;
+}
+
+export interface Titel {
+    titel: string;
+    untertitel?: string;
+}
+
+export interface Buch {
+    id: number;
+    version: number;
+    isbn: string;
+    rating?: number;
+    art: BuchArt;
+    preis: number;
+    lieferbar: boolean;
+    datum?: string;
+    homepage?: string;
+    schlagwoerter?: string[];
+    titel: Titel;
+    rabatt: (short: boolean) => string;
+}
