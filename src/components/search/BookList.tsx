@@ -43,7 +43,7 @@ const BookList: React.FC = () => {
                         <span>Buch: {book.titel.titel}, {book.titel.untertitel}, ISBN: {book.isbn}, Rating: {book.rating}, Preis: {book.preis} €</span>
                     </div>
                     <div className="flex-shrink-0">
-                        <Link href={`/details/${book.id}`} className="btn btn-primary btn-sm me-1">Details</Link>
+                        <Link href={`/${book.id}/details`} className="btn btn-primary btn-sm me-1">Details</Link>
                         <button className="btn btn-success btn-sm me-1">Edit</button>
                         <button className="btn btn-danger btn-sm">Del</button>
                     </div>
