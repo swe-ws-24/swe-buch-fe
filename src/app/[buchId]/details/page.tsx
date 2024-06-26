@@ -2,7 +2,6 @@
 import React from 'react';
 import HomeButton from '@/components/adminPanel/HomeButton';
 import BookDetails from '@/components/details/BookDetails';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Page = () => {
     // Beispielhafte Daten. In der Anwendung durch einen API-Aufruf ersetzen.
