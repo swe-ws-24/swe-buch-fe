@@ -14,38 +14,18 @@ const BookList: React.FC = () => {
     const { criteria } = useSearchCriteria();
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            const queryFilter: FilterParameter[] = [];
-            if (criteria.titel) {
-                queryFilter.push({ key: 'titel', value: criteria.titel });
-              }
-              if (criteria.isbn) {
-                queryFilter.push({ key: 'isbn', value: criteria.isbn });
-              }
-              if (criteria.art) {
-                queryFilter.push({ key: 'art', value: criteria.art });
-              }
-              if (criteria.lieferbar) {
-                queryFilter.push({ key: 'lieferbar', value: criteria.lieferbar });
-              }
-              if (criteria.rating) {
-                queryFilter.push({ key: 'rating', value: criteria.rating });
-              }
-            const response = queryBuecher(
-                [
-                    BuchFields.id,
-                    BuchFields.titel,
-                    BuchFields.isbn,
-                    BuchFields.art,
-                    BuchFields.lieferbar,
-                    BuchFields.rating,
-                ],
-                queryFilter
-            );
+        const response = queryBuecher(
+            criteria,
+        ).then((response) => {
             console.log(response);
-        };
-        
-        fetchBooks();
+            if (response.status == 200){
+                if (response.data.data.buecher) {
+                    setBooks(response.data.data.buecher);
+                } else {
+                    setBooks([]);
+                }
+            }
+        });
     }, [criteria]);
 
     return (

@@ -69,10 +69,9 @@ export const login = async (username: string, password: string) => {
 };
 
 export const queryBuecher = async (
-  queryFields?: BuchFields[],
-  suchkriterien?: SuchkriterienInput[],
+  suchkriterien: SuchkriterienInput,
 ): Promise<AxiosResponse> => {
-  const query = buildQuery(queryFields, suchkriterien);
+  const query = buildQuery(suchkriterien);
 
   const options = {
       method: 'POST',
@@ -88,6 +87,8 @@ export const queryBuecher = async (
           query,
       },
   };
+
+  console.log(options);
 
   return axios.request(options);
 };

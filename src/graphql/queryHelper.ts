@@ -1,90 +1,31 @@
 import { BuchFields, FilterParameter, SuchkriterienInput } from "@graphql/interfaces";
 
 export const buildQuery = (
-    queryFields?: BuchFields[],
-    suchkrieterien?: SuchkriterienInput,
+    suchkriterien: SuchkriterienInput
 ): string => {
-    let fields = '';
+    // Funktion, um Suchkriterien in eine GraphQL-konforme Zeichenkette zu konvertieren
+    const buildSuchkriterienString = (criteria: SuchkriterienInput): string => {
+        const fields = [];
+        if (criteria.titel) fields.push(`titel: "${criteria.titel}"`);
+        if (criteria.isbn) fields.push(`isbn: "${criteria.isbn}"`);
+        if (criteria.rating !== undefined) fields.push(`rating: ${criteria.rating}`);
+        if (criteria.art) fields.push(`art: ${criteria.art}`);
+        if (criteria.lieferbar !== undefined) fields.push(`lieferbar: ${criteria.lieferbar}`);
+        
+        return `{${fields.join(", ")}}`;
+    };
 
-    if (queryFields && queryFields.length > 0) {
-        for (const buchField of queryFields) {
-            switch (buchField) {
-                case BuchFields.id:
-                    fields += `
-                        id
-                    `;
-                    break;
-                case BuchFields.version:
-                    fields += `
-                        version
-                    `;
-                    break;
-                case BuchFields.isbn:
-                    fields += `
-                        isbn
-                    `;
-                    break;
-                case BuchFields.rating:
-                    fields += `
-                        rating
-                    `;
-                    break;
-                case BuchFields.art:
-                    fields += `
-                        art
-                    `;
-                    break;
-                case BuchFields.preis:
-                    fields += `
-                        preis
-                    `;
-                    break;
-                case BuchFields.rabatt:
-                    fields += `
-                        rabatt
-                    `;
-                    break;
-                case BuchFields.lieferbar:
-                    fields += `
-                        lieferbar
-                    `;
-                    break;
-                case BuchFields.datum:
-                    fields += `
-                        datum
-                    `;
-                    break;
-                case BuchFields.homepage:
-                    fields += `
-                        homepage
-                    `;
-                    break;
-                case BuchFields.schlagwoerter:
-                    fields += `
-                        schlagwoerter
-                    `;
-                    break;
-                case BuchFields.titel:
-                    fields += `
-                        titel {
-                            titel
-                            untertitel
-                        }
-                    `;
-                    break;
-                default:
-                    break;
-            }
-        }
-    } else {
-        fields = `
+    const suchkriterienString = buildSuchkriterienString(suchkriterien);
+
+    return `
+    {
+        buecher(suchkriterien: ${suchkriterienString}) {
             id
             version
             isbn
             rating
             art
             preis
-            rabatt
             lieferbar
             datum
             homepage
@@ -93,9 +34,7 @@ export const buildQuery = (
                 titel
                 untertitel
             }
-        `;
-    }
-    const filter = `buecher(suchkriterien: ${suchkrieterien})`;
-
-    return `{${filter} {${fields}}}`;
+            rabatt(short: true)
+        }
+    }`;
 };
