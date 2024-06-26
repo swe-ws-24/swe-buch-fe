@@ -46,15 +46,6 @@ const BookList: React.FC = () => {
                     </div>
                 </div>
             ))}
-            <div>
-                {error}
-            </div>
-            <div className="mt-4 text-center">
-                <div className="d-flex justify-content-center align-items-center">
-                    <input type="text" className="form-control" placeholder="Neues Buch anlegen:" style={{width: '300px'}} />
-                    <button className="btn btn-primary ms-2" style={{width: '80px'}}>Go</button>
-                </div>
-            </div>
         </div>
     );
 };

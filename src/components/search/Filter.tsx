@@ -24,38 +24,21 @@ const Filter: React.FC = () => {
     };
 
     return (
-        <div className="border p-2">
+        <div className="shadow p-3 vh-100 d-flex flex-column">
             <div className="mb-2">
                 <h6 className="mb-1">Lieferbar?</h6>
                 <div className="form-check">
                     <input 
-                        className="form-check-input" 
-                        type="radio" 
-                        id="availableYes" 
-                        checked={lieferbar}
-                        onChange={
-                            (e) => {
-                                setLieferbar(e.target.checked);
-                                propagateSearch();
-                            }
-                        }
+                    className="form-check-input" 
+                    type="checkbox" 
+                    id="available" 
+                    checked={lieferbar}
+                    onChange={(e) => {
+                        setLieferbar(e.target.checked);
+                        propagateSearch();
+                    }}
                     />
-                    <label className="form-check-label" htmlFor="availableYes">Ja</label>
-                </div>
-                <div className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        id="availableNo"
-                        checked={!lieferbar}
-                        onChange={
-                            (e) => {
-                                setLieferbar(!e.target.checked);
-                                propagateSearch();
-                            }
-                        }
-                    />
-                    <label className="form-check-label" htmlFor="availableNo">Nein</label>
+                    <label className="form-check-label" htmlFor="available">Ja</label>
                 </div>
             </div>
             <div className="mb-2">
