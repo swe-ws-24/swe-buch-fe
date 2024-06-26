@@ -88,7 +88,5 @@ export const queryBuecher = async (
       },
   };
 
-  console.log(options);
-
   return axios.request(options);
 };

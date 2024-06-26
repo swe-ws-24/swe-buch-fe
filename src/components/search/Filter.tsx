@@ -12,8 +12,8 @@ const Filter: React.FC = () => {
 
     const propagateSearch = () => {
         const suchkriterien: SuchkriterienInput = {
-            titel: criteria.titel,
-            isbn: criteria.isbn,
+            titel: "",
+            isbn: "",
             lieferbar: lieferbar,
             rating: rating,
             art: buchArt,

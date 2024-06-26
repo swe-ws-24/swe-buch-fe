@@ -14,6 +14,7 @@ const BookList: React.FC = () => {
     const { criteria } = useSearchCriteria();
 
     useEffect(() => {
+        console.log(criteria);
         const response = queryBuecher(
             criteria,
         ).then((response) => {
