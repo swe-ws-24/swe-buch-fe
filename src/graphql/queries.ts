@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import Auth from './auth';
 import https from 'https';
-import { BuchFields, BuchInput, FilterParameter, LoginStatus, SuchkriterienInput } from '@graphql/interfaces';
+import { BuchFields, BuchInput, LoginStatus, SuchkriterienInput } from '@graphql/interfaces';
 import { buildQuery } from '@graphql/queryHelper';
 
 const auth = new Auth();
@@ -116,6 +116,47 @@ export const createBuch = async (buchData: BuchInput) => {
               buchData,
           },
       },
+  };
+
+  return axios.request(options);
+};
+
+export const queryBuch = async (id: string): Promise<AxiosResponse> => {
+  const query = `
+  query {
+    buch(id: "${id}") {
+      id
+      version
+      isbn
+      rating
+      art
+      preis
+      lieferbar
+      datum
+      homepage
+      schlagwoerter
+      titel {
+        titel
+        untertitel
+      }
+      rabatt(short: true)
+    }
+  }
+  `;
+
+  const options = {
+    method: 'POST',
+    url: 'https://localhost:3000/graphql',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-REQUEST-TYPE': 'GraphQL',
+      ...(auth.checkAuthCookie() && {
+        Authorization: `Bearer ${auth.getAuthCookie().token}`,
+      }),
+    },
+    data: {
+      query,
+    },
   };
 
   return axios.request(options);

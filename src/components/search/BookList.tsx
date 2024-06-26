@@ -44,8 +44,6 @@ const BookList: React.FC = () => {
                     </div>
                     <div className="flex-shrink-0">
                         <Link href={`/${book.id}/details`} className="btn btn-primary btn-sm me-1">Details</Link>
-                        <button className="btn btn-success btn-sm me-1">Edit</button>
-                        <button className="btn btn-danger btn-sm">Del</button>
                     </div>
                 </div>
             ))}
