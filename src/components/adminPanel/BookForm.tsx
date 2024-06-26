@@ -1,6 +1,5 @@
 // src/components/adminPanel/BookForm.tsx
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const BookForm: React.FC = () => {
     return (

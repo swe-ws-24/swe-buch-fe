@@ -4,7 +4,6 @@ import ConfirmButton from '@/components/adminPanel/ConfirmButton';
 import BookForm from '@/components/adminPanel/BookForm';
 import HomeButton from '@/components/adminPanel/HomeButton';
 import AdminUsername from '@/components/adminPanel/AdminUsername';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AdminPanel: React.FC = () => {
     return (
