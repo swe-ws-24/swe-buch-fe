@@ -25,6 +25,12 @@ const Filter: React.FC = () => {
 
     return (
         <div className="shadow p-3 vh-100 d-flex flex-column">
+            <button className="btn btn-primary" onClick={
+                (e) => {
+                    propagateSearch();
+                }
+            }>Suchen</button>
+            <br />
             <div className="mb-2">
                 <h6 className="mb-1">Lieferbar?</h6>
                 <div className="form-check">
@@ -35,7 +41,6 @@ const Filter: React.FC = () => {
                     checked={lieferbar}
                     onChange={(e) => {
                         setLieferbar(e.target.checked);
-                        propagateSearch();
                     }}
                     />
                     <label className="form-check-label" htmlFor="available">Ja</label>
@@ -53,7 +58,6 @@ const Filter: React.FC = () => {
                                 checked={rating === currentRating}
                                 onChange={(e) => {
                                     setRating(currentRating);
-                                    propagateSearch();
                                 }}
                             />
                             <label className="form-check-label" htmlFor={`rating${currentRating}`}>{currentRating}</label>
@@ -70,7 +74,6 @@ const Filter: React.FC = () => {
                     onChange={
                         (e) => {
                             setBuchArt(e.target.value as BuchArt);
-                            propagateSearch();
                         }
                     }
                 >

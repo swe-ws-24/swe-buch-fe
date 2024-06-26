@@ -23,6 +23,7 @@ const BookList: React.FC = () => {
             if (response.status == 200){
                 if (response.data.data.buecher) {
                     setBooks(response.data.data.buecher);
+                    setError("");
                 } else {
                     setBooks([]);
                     if (response.data.errors.length >= 1) {
@@ -35,6 +36,7 @@ const BookList: React.FC = () => {
 
     return (
         <div>
+            {error}
             {books.map((book: Buch) => (
                 <div key={book.id} className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light">
                     <div className="text-truncate me-2" style={{ minWidth: 0 }}>
