@@ -1,5 +1,6 @@
 // src/components/adminPanel/BookForm.tsx
 import { AbbildungInput, BuchArt, BuchInput } from '@/graphql/interfaces';
+import { createBuch } from '@/graphql/queries';
 import React, { useState } from 'react';
 
 const BookForm: React.FC = () => {
@@ -25,9 +26,7 @@ const BookForm: React.FC = () => {
     const addBook = () => {
         // Alle nicht null werte prüfen
         if (
-            titel !== "" && titel !== null &&
-            beschriftung !== "" && beschriftung !== null &&
-            contentType !== "" && contentType !== null
+            titel !== "" && titel !== null
         ) {
             // GraphQL Mutation
             const data: BuchInput = {
@@ -48,8 +47,13 @@ const BookForm: React.FC = () => {
             };
 
             console.log(data);
-
-            
+            setError("");
+            createBuch(data).then((buchResponse) => {
+                console.log(buchResponse);
+                if (buchResponse.data.errors.length >= 1) {
+                    setError(buchResponse.data.errors[0].message);
+                }
+            });
         } else {
             setError("Du musst alle Pflichtfelder korrekt ausfüllen");
         }

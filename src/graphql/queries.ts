@@ -91,9 +91,15 @@ export const queryBuecher = async (
   return axios.request(options);
 };
 
-export const addBuch = async (
-  buch: BuchInput,
-): Promise<AxiosResponse> => {
+export const createBuch = async (buchData: BuchInput) => {
+  const mutation = `
+    mutation create($buchData: BuchInput!) {
+      create(input: $buchData){
+        id
+      }
+    }
+  `;
+
   const options = {
       method: 'POST',
       url: 'https://localhost:3000/graphql',
@@ -105,7 +111,10 @@ export const addBuch = async (
           }),
       },
       data: {
-          query,
+          query: mutation,
+          variables: {
+              buchData,
+          },
       },
   };
 
