@@ -18,7 +18,7 @@ const LoginForm: React.FC = () => {
             response.errors.forEach(err => setError(prev => prev + " " + err));
         } else {
             console.log('Erfolgreich eingeloggt!');
-            router.push('/admin/adminPanel');
+            router.push('/search');
         }
     };
 
@@ -50,8 +50,12 @@ const LoginForm: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <div className="pt-4">
+                {error && <div className="alert alert-danger">{error}</div>}
+            </div>
+            <div className="pt-3">
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </div>
         </form>
     );
 };
