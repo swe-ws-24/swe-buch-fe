@@ -7,6 +7,7 @@ import {
 } from '@graphql/interfaces'
 import { useSearchCriteria } from '@context/SearchCriteriaContext';
 import { queryBuecher } from '@graphql/queries';
+import Link from 'next/link';
 
 const BookList: React.FC = () => {
     const [books, setBooks] = useState<Buch[]>([]);
@@ -40,7 +41,7 @@ const BookList: React.FC = () => {
                         <span>Buch: {book.titel.titel}, {book.titel.untertitel}, ISBN: {book.isbn}, Rating: {book.rating}, Preis: {book.preis} €</span>
                     </div>
                     <div className="flex-shrink-0">
-                        <button className="btn btn-primary btn-sm me-1">Details</button>
+                        <Link href={`/details/${book.id}`} className="btn btn-primary btn-sm me-1">Details</Link>
                         <button className="btn btn-success btn-sm me-1">Edit</button>
                         <button className="btn btn-danger btn-sm">Del</button>
                     </div>
