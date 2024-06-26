@@ -1,5 +1,5 @@
 // src/components/adminPanel/BookForm.tsx
-import { BuchArt } from '@/graphql/interfaces';
+import { AbbildungInput, BuchArt, BuchInput } from '@/graphql/interfaces';
 import React, { useState } from 'react';
 
 const BookForm: React.FC = () => {
@@ -16,7 +16,8 @@ const BookForm: React.FC = () => {
     const [titel, setTitel] = useState<string>("");  // Done
     const [untertitel, setUntertitel] = useState<string>(""); // Done
     const [beschriftung, setBeschriftung] = useState<string>(""); // Done
-    const [contentType, setContentType] = useState<string>("");
+    const [contentType, setContentType] = useState<string>(""); // Done
+    const [abbildungen, setAbbildungen] = useState<AbbildungInput[]>([]); // Done
 
     const [error, setError] = useState<string>("");
 
@@ -29,7 +30,7 @@ const BookForm: React.FC = () => {
             contentType !== "" && contentType !== null
         ) {
             // GraphQL Mutation
-            const data = {
+            const data: BuchInput = {
                 isbn: isbn,
                 rating: rating,
                 art: art as BuchArt,
@@ -43,15 +44,12 @@ const BookForm: React.FC = () => {
                     titel: titel,
                     untertitel: untertitel,
                 },
-                abbildung: {
-                    beschriftung: beschriftung,
-                    contentType: contentType,
-                },
+                abbildungen: abbildungen,
             };
 
             console.log(data);
 
-
+            
         } else {
             setError("Du musst alle Pflichtfelder korrekt ausfüllen");
         }
@@ -234,6 +232,28 @@ const BookForm: React.FC = () => {
                                     setContentType(e.target.value);
                                 }
                             } />
+                        </div>
+                    </div>
+                    <div className="row mb-3 align-items-center">
+                        <button className="btn btn-primary" onClick={
+                            (e) => {
+                                e.preventDefault();
+                                setAbbildungen([...abbildungen, ({beschriftung: beschriftung, contentType: contentType} as AbbildungInput)]);
+                                setBeschriftung("");
+                                setContentType("");
+                            }
+                        }>Abbildung hinzufügen</button>
+                    </div>
+                    <div className="row mb-3 align-items-center">
+                        <label htmlFor="images" className="col-sm-4 col-form-label text-nowrap">Abbildungen</label>
+                        <div className="col-sm-8">
+                            {
+                                abbildungen.map((abbildung, index) => (
+                                    <div key={index}>
+                                        {abbildung.beschriftung}: {abbildung.contentType}
+                                    </div>
+                                    ))
+                            }
                         </div>
                     </div>
                 </div>

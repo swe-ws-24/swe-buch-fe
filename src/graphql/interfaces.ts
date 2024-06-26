@@ -91,3 +91,28 @@ export interface FilterParameter {
     key: string;
     value: string | boolean | number;
 }
+
+export interface AbbildungInput {
+    beschriftung: string;
+    contentType: string;
+}
+
+export interface TitelInput {
+    titel: string;
+    untertitel?: string;
+}
+
+export interface BuchInput {
+    isbn?: string;
+    rating?: number;
+    art?: BuchArt;
+    preis?: number;
+    rabatt?: number;
+    lieferbar?: boolean;
+    datum?: string;               
+    homepage?: string;
+    schlagwoerter?: string[];
+    titel: TitelInput;
+    abbildungen?: AbbildungInput[];
+}
+  
