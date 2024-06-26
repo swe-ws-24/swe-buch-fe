@@ -48,7 +48,7 @@ const Filter: React.FC = () => {
                         <div className="form-check" key={currentRating}>
                             <input
                                 className="form-check-input"
-                                type="checkbox"
+                                type="radio"
                                 id={`rating${rating}`}
                                 checked={rating === currentRating}
                                 onChange={(e) => {
