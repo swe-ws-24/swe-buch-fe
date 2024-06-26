@@ -1,16 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Searchbar from '@/components/search/Searchbar';
 import Filter from '@/components/search/Filter';
 import BookList from '@/components/search/BookList';
-import {
-    Buch,
-} from '@graphql/interfaces'
 import { SearchCriteriaProvider } from '@context/SearchCriteriaContext';
 
 const SearchPage: React.FC = () => {
-    const [books, setBooks] = useState<Buch[]>([]);
-
     return (
         <SearchCriteriaProvider>
             <div className="container-fluid mt-3">
@@ -26,7 +21,7 @@ const SearchPage: React.FC = () => {
                         </div>
                         <div className="row">
                             <div className="col">
-                                <BookList books={books} />
+                                <BookList />
                             </div>
                         </div>
                     </div>

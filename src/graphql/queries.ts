@@ -1,12 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Auth from './auth';
 import https from 'https';
-import { LoginStatus } from './interfaces';
+import { BuchFields, FilterParameter, LoginStatus, SuchkriterienInput } from '@graphql/interfaces';
+import { buildQuery } from '@graphql/queryHelper';
 
 const auth = new Auth();
 
 const httpsAgent = new https.Agent({  
-    rejectUnauthorized: false // Warnung: Setzt dich Sicherheitsrisiken aus
+    rejectUnauthorized: false,
 });
 
 axios.interceptors.request.use(config => {
@@ -65,4 +66,28 @@ export const login = async (username: string, password: string) => {
   }
 
   return LoginStatus;
+};
+
+export const queryBuecher = async (
+  queryFields?: BuchFields[],
+  suchkriterien?: SuchkriterienInput[],
+): Promise<AxiosResponse> => {
+  const query = buildQuery(queryFields, suchkriterien);
+
+  const options = {
+      method: 'POST',
+      url: 'https://localhost:3000/graphql',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-REQUEST-TYPE': 'GraphQL',
+          ...(auth.checkAuthCookie() && {
+              Authorization: `Bearer ${auth.getAuthCookie().token}`,
+          }),
+      },
+      data: {
+          query,
+      },
+  };
+
+  return axios.request(options);
 };

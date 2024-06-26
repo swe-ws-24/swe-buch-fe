@@ -71,3 +71,23 @@ export interface Buch {
     titel: Titel;
     rabatt: (short: boolean) => string;
 }
+
+export enum BuchFields {
+    'id',
+    'version',
+    'isbn',
+    'rating',
+    'art',
+    'preis',
+    'lieferbar',
+    'datum',
+    'homepage',
+    'schlagwoerter',
+    'titel',
+    'rabatt',
+}
+
+export interface FilterParameter {
+    key: string;
+    value: string | boolean | number;
+}

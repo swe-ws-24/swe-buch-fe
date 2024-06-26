@@ -1,19 +1,58 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import {
     Buch,
+    BuchFields,
+    FilterParameter,
 } from '@graphql/interfaces'
+import { useSearchCriteria } from '@context/SearchCriteriaContext';
+import { queryBuecher } from '@graphql/queries';
+import { AxiosResponse } from 'axios';
 
-interface BookListProps {
-    books: Buch[];
-}
+const BookList: React.FC = () => {
+    const [books, setBooks] = useState<Buch[]>([]);
+    const { criteria } = useSearchCriteria();
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const queryFilter: FilterParameter[] = [];
+            if (criteria.titel) {
+                queryFilter.push({ key: 'titel', value: criteria.titel });
+              }
+              if (criteria.isbn) {
+                queryFilter.push({ key: 'isbn', value: criteria.isbn });
+              }
+              if (criteria.art) {
+                queryFilter.push({ key: 'art', value: criteria.art });
+              }
+              if (criteria.lieferbar) {
+                queryFilter.push({ key: 'lieferbar', value: criteria.lieferbar });
+              }
+              if (criteria.rating) {
+                queryFilter.push({ key: 'rating', value: criteria.rating });
+              }
+            const response = queryBuecher(
+                [
+                    BuchFields.id,
+                    BuchFields.titel,
+                    BuchFields.isbn,
+                    BuchFields.art,
+                    BuchFields.lieferbar,
+                    BuchFields.rating,
+                ],
+                queryFilter
+            );
+            console.log(response);
+        };
+        
+        fetchBooks();
+    }, [criteria]);
+
     return (
         <div>
             {books.map((book: Buch) => (
                 <div key={book.id} className="d-flex justify-content-between align-items-center mb-2 p-2 bg-light">
                     <div className="text-truncate me-2" style={{ minWidth: 0 }}>
-                        {/* Achte darauf, dass die Feldnamen im Interface und hier übereinstimmen */}
                         <span>Buch: {book.titel.titel}, {book.titel.untertitel}, ISBN: {book.isbn}, Rating: {book.rating}, Preis: {book.preis} €</span>
                     </div>
                     <div className="flex-shrink-0">
