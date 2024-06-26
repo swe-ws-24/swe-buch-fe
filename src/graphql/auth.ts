@@ -13,16 +13,16 @@ class Auth {
 
     setAuthCookie(token: string) {
         const decodedJwt = jwtDecode<JwtTokenPayload>(token);
-        const { exp, username } = decodedJwt;
+        const { exp, preferred_username } = decodedJwt;
         const cookiePayload = {
             token,
-            username,
+            preferred_username,
         };
         this.#cookies.set(COOKIE_NAME, cookiePayload, {
-            // Berechnung: 1000 Millisekunden/Sekunde * 60 Sekunden/Minute * 60 Minuten/Stunde * 24 Stunden/Tag * 30 Tage
-            expires: new Date(exp + (1000 * 60 * 60 * 24 * 30)),
+            expires: new Date(exp * 1000),
             sameSite: 'strict',
         });
+        console.log(this.#cookies.get(COOKIE_NAME));
         return this.checkAuthCookie();
     }
 
